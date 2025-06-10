@@ -763,8 +763,7 @@ def generate_comments(data, ticker, start_date, end_date):
 
 
 
-
-# Ogólny trend
+ # Ogólny trend
     if total_change_pct > 0:
         comment += f"W analizowanym okresie indeks {ticker} wzrósł o **{total_change_pct:.2f}%**, "
         comment += f"od {start_price:.2f} do {end_price:.2f} punktów. "
@@ -774,10 +773,10 @@ def generate_comments(data, ticker, start_date, end_date):
         comment += f"od {start_price:.2f} do {end_price:.2f} punktów. "
         trend_description = "spadkowy"
 
-# Średnie kroczące
-        comment += "\n#### Analiza średnich kroczących\n"
+    # Średnie kroczące
+    comment += "#### Analiza średnich kroczących"
 
-# Pozycja ceny względem średnich
+    # Pozycja ceny względem średnich
     if latest_close > latest_ma20 > latest_ma50 > latest_ma200:
         comment += "Cena znajduje się **powyżej wszystkich średnich kroczących** (20, 50 i 200-sesyjnej), "
         comment += "co wskazuje na silny trend wzrostowy i potwierdza przewagę kupujących na rynku. "
@@ -789,7 +788,7 @@ def generate_comments(data, ticker, start_date, end_date):
     elif latest_close < latest_ma50:
         comment += "Cena znajduje się **poniżej średniej 50-sesyjnej**, co może wskazywać na kontynuację trendu spadkowego w średnim terminie. "
 
-# Analiza przecięć średnich
+    # Analiza przecięć średnich
     if latest_ma20 > latest_ma50 and filtered_data['MA20'].iloc[-20] < filtered_data['MA50'].iloc[-20]:
         comment += "W ostatnim czasie doszło do **przecięcia średniej 20-sesyjnej ze średnią 50-sesyjną** od dołu, "
         comment += "co jest interpretowane jako sygnał kupna (tzw. 'złoty krzyż' dla krótszych średnich). "
@@ -797,8 +796,8 @@ def generate_comments(data, ticker, start_date, end_date):
         comment += "W ostatnim czasie doszło do **przecięcia średniej 20-sesyjnej ze średnią 50-sesyjną** od góry, "
         comment += "co jest interpretowane jako sygnał sprzedaży (tzw. 'krzyż śmierci' dla krótszych średnich). "
 
-# RSI
-    comment += "\n#### Analiza RSI\n"
+    # RSI
+    comment += "#### Analiza RSI"
 
     if latest_rsi > 70:
         comment += f"Wartość wskaźnika RSI wynosi obecnie **{latest_rsi:.2f}** i znajduje się w strefie wykupienia (powyżej 70), "
@@ -808,15 +807,15 @@ def generate_comments(data, ticker, start_date, end_date):
         comment += "co może sugerować, że indeks jest niedowartościowany i możliwe jest odbicie wzrostowe. "
     else:
         comment += f"Wartość wskaźnika RSI wynosi obecnie **{latest_rsi:.2f}** i znajduje się w neutralnej strefie, "
-     if latest_rsi > 50:
-        comment += "z tendencją do wzrostu, co potwierdza ogólny trend wzrostowy. "
-    else:
-        comment += "z tendencją do spadku, co potwierdza ogólny trend spadkowy. "
+        if latest_rsi > 50:
+            comment += "z tendencją do wzrostu, co potwierdza ogólny trend wzrostowy. "
+        else:
+            comment += "z tendencją do spadku, co potwierdza ogólny trend spadkowy. "
 
     # Zmienność
-        volatility = (filtered_data['Close'].std() / filtered_data['Close'].mean()) * 100
-        comment += "\n#### Zmienność\n"
-        comment += f"Zmienność indeksu w analizowanym okresie wynosi **{volatility:.2f}%**. "
+    volatility = (filtered_data['Close'].std() / filtered_data['Close'].mean()) * 100
+    comment += "#### Zmienność"
+    comment += f"Zmienność indeksu w analizowanym okresie wynosi **{volatility:.2f}%**. "
 
     if volatility > 5:
         comment += "Jest to stosunkowo wysoka zmienność, co wskazuje na podwyższone ryzyko inwestycyjne, "
@@ -825,9 +824,9 @@ def generate_comments(data, ticker, start_date, end_date):
         comment += "Jest to stosunkowo niska zmienność, co wskazuje na stabilne zachowanie indeksu, "
         comment += "preferowane przy strategiach długoterminowych. "
 
-        # Podsumowanie
-        comment += "\n#### Podsumowanie\n"
-        comment += f"Ogólny trend dla indeksu {ticker} w analizowanym okresie jest **{trend_description}**. "
+    # Podsumowanie
+    comment += "#### Podsumowanie"
+    comment += f"Ogólny trend dla indeksu {ticker} w analizowanym okresie jest **{trend_description}**. "
 
     if trend_description == "wzrostowy" and latest_rsi < 70:
         comment += "Analiza techniczna wskazuje na kontynuację trendu wzrostowego, "
