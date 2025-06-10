@@ -991,7 +991,7 @@ def main():
         Aplikacja stworzona w ramach projektu zaliczeniowego.
 
         **Autorzy:** Piech Faustyna; Skiba Maria;
-        Skrzek Martyna; Solarz Aleksandra;
+        Skrzek Martyna; Solarz Aleksandra;\n
         Dawid Stachiewicz  
         **Data zakończenia:** 10.06.2025
         """)
