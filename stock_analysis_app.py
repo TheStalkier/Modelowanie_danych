@@ -990,8 +990,10 @@ def main():
         st.markdown("""
         Aplikacja stworzona w ramach projektu zaliczeniowego.
 
-        **Autor:** Student  
-        **Data:** 10.06.2025
+        **Autorzy:** Piech Faustyna; Skiba Maria;
+        Skrzek Martyna; Solarz Aleksandra;
+        Dawid Stachiewicz  
+        **Data zakończenia:** 10.06.2025
         """)
 
     # Sprawdzenie, czy wybrano indeksy
