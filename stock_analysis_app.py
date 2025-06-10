@@ -765,84 +765,84 @@ def generate_comments(data, ticker, start_date, end_date):
 
 
 # Ogólny trend
-if total_change_pct > 0:
-    comment += f"W analizowanym okresie indeks {ticker} wzrósł o **{total_change_pct:.2f}%**, "
-    comment += f"od {start_price:.2f} do {end_price:.2f} punktów. "
-    trend_description = "wzrostowy"
-else:
-    comment += f"W analizowanym okresie indeks {ticker} spadł o **{abs(total_change_pct):.2f}%**, "
-    comment += f"od {start_price:.2f} do {end_price:.2f} punktów. "
-    trend_description = "spadkowy"
+    if total_change_pct > 0:
+        comment += f"W analizowanym okresie indeks {ticker} wzrósł o **{total_change_pct:.2f}%**, "
+        comment += f"od {start_price:.2f} do {end_price:.2f} punktów. "
+        trend_description = "wzrostowy"
+    else:
+        comment += f"W analizowanym okresie indeks {ticker} spadł o **{abs(total_change_pct):.2f}%**, "
+        comment += f"od {start_price:.2f} do {end_price:.2f} punktów. "
+        trend_description = "spadkowy"
 
 # Średnie kroczące
-comment += "\n#### Analiza średnich kroczących\n"
+        comment += "\n#### Analiza średnich kroczących\n"
 
 # Pozycja ceny względem średnich
-if latest_close > latest_ma20 > latest_ma50 > latest_ma200:
-    comment += "Cena znajduje się **powyżej wszystkich średnich kroczących** (20, 50 i 200-sesyjnej), "
-    comment += "co wskazuje na silny trend wzrostowy i potwierdza przewagę kupujących na rynku. "
-elif latest_close < latest_ma20 < latest_ma50 < latest_ma200:
-    comment += "Cena znajduje się **poniżej wszystkich średnich kroczących** (20, 50 i 200-sesyjnej), "
-    comment += "co wskazuje na silny trend spadkowy i potwierdza przewagę sprzedających na rynku. "
-elif latest_close > latest_ma50:
-    comment += "Cena znajduje się **powyżej średniej 50-sesyjnej**, co może wskazywać na kontynuację trendu wzrostowego w średnim terminie. "
-elif latest_close < latest_ma50:
-    comment += "Cena znajduje się **poniżej średniej 50-sesyjnej**, co może wskazywać na kontynuację trendu spadkowego w średnim terminie. "
+    if latest_close > latest_ma20 > latest_ma50 > latest_ma200:
+        comment += "Cena znajduje się **powyżej wszystkich średnich kroczących** (20, 50 i 200-sesyjnej), "
+        comment += "co wskazuje na silny trend wzrostowy i potwierdza przewagę kupujących na rynku. "
+    elif latest_close < latest_ma20 < latest_ma50 < latest_ma200:
+        comment += "Cena znajduje się **poniżej wszystkich średnich kroczących** (20, 50 i 200-sesyjnej), "
+        comment += "co wskazuje na silny trend spadkowy i potwierdza przewagę sprzedających na rynku. "
+    elif latest_close > latest_ma50:
+        comment += "Cena znajduje się **powyżej średniej 50-sesyjnej**, co może wskazywać na kontynuację trendu wzrostowego w średnim terminie. "
+    elif latest_close < latest_ma50:
+        comment += "Cena znajduje się **poniżej średniej 50-sesyjnej**, co może wskazywać na kontynuację trendu spadkowego w średnim terminie. "
 
 # Analiza przecięć średnich
-if latest_ma20 > latest_ma50 and filtered_data['MA20'].iloc[-20] < filtered_data['MA50'].iloc[-20]:
-    comment += "W ostatnim czasie doszło do **przecięcia średniej 20-sesyjnej ze średnią 50-sesyjną** od dołu, "
-    comment += "co jest interpretowane jako sygnał kupna (tzw. 'złoty krzyż' dla krótszych średnich). "
-elif latest_ma20 < latest_ma50 and filtered_data['MA20'].iloc[-20] > filtered_data['MA50'].iloc[-20]:
-    comment += "W ostatnim czasie doszło do **przecięcia średniej 20-sesyjnej ze średnią 50-sesyjną** od góry, "
-    comment += "co jest interpretowane jako sygnał sprzedaży (tzw. 'krzyż śmierci' dla krótszych średnich). "
+    if latest_ma20 > latest_ma50 and filtered_data['MA20'].iloc[-20] < filtered_data['MA50'].iloc[-20]:
+        comment += "W ostatnim czasie doszło do **przecięcia średniej 20-sesyjnej ze średnią 50-sesyjną** od dołu, "
+        comment += "co jest interpretowane jako sygnał kupna (tzw. 'złoty krzyż' dla krótszych średnich). "
+    elif latest_ma20 < latest_ma50 and filtered_data['MA20'].iloc[-20] > filtered_data['MA50'].iloc[-20]:
+        comment += "W ostatnim czasie doszło do **przecięcia średniej 20-sesyjnej ze średnią 50-sesyjną** od góry, "
+        comment += "co jest interpretowane jako sygnał sprzedaży (tzw. 'krzyż śmierci' dla krótszych średnich). "
 
 # RSI
-comment += "\n#### Analiza RSI\n"
+    comment += "\n#### Analiza RSI\n"
 
-if latest_rsi > 70:
-    comment += f"Wartość wskaźnika RSI wynosi obecnie **{latest_rsi:.2f}** i znajduje się w strefie wykupienia (powyżej 70), "
-    comment += "co może sugerować, że indeks jest przewartościowany i możliwa jest korekta spadkowa. "
-elif latest_rsi < 30:
-    comment += f"Wartość wskaźnika RSI wynosi obecnie **{latest_rsi:.2f}** i znajduje się w strefie wyprzedania (poniżej 30), "
-    comment += "co może sugerować, że indeks jest niedowartościowany i możliwe jest odbicie wzrostowe. "
-else:
-    comment += f"Wartość wskaźnika RSI wynosi obecnie **{latest_rsi:.2f}** i znajduje się w neutralnej strefie, "
-    if latest_rsi > 50:
+    if latest_rsi > 70:
+        comment += f"Wartość wskaźnika RSI wynosi obecnie **{latest_rsi:.2f}** i znajduje się w strefie wykupienia (powyżej 70), "
+        comment += "co może sugerować, że indeks jest przewartościowany i możliwa jest korekta spadkowa. "
+    elif latest_rsi < 30:
+        comment += f"Wartość wskaźnika RSI wynosi obecnie **{latest_rsi:.2f}** i znajduje się w strefie wyprzedania (poniżej 30), "
+        comment += "co może sugerować, że indeks jest niedowartościowany i możliwe jest odbicie wzrostowe. "
+    else:
+        comment += f"Wartość wskaźnika RSI wynosi obecnie **{latest_rsi:.2f}** i znajduje się w neutralnej strefie, "
+     if latest_rsi > 50:
         comment += "z tendencją do wzrostu, co potwierdza ogólny trend wzrostowy. "
     else:
         comment += "z tendencją do spadku, co potwierdza ogólny trend spadkowy. "
 
-# Zmienność
-volatility = (filtered_data['Close'].std() / filtered_data['Close'].mean()) * 100
-comment += "\n#### Zmienność\n"
-comment += f"Zmienność indeksu w analizowanym okresie wynosi **{volatility:.2f}%**. "
+    # Zmienność
+        volatility = (filtered_data['Close'].std() / filtered_data['Close'].mean()) * 100
+        comment += "\n#### Zmienność\n"
+        comment += f"Zmienność indeksu w analizowanym okresie wynosi **{volatility:.2f}%**. "
 
-if volatility > 5:
-    comment += "Jest to stosunkowo wysoka zmienność, co wskazuje na podwyższone ryzyko inwestycyjne, "
-    comment += "ale jednocześnie oferuje potencjalne okazje inwestycyjne dla strategii krótkoterminowych. "
-else:
-    comment += "Jest to stosunkowo niska zmienność, co wskazuje na stabilne zachowanie indeksu, "
-    comment += "preferowane przy strategiach długoterminowych. "
+    if volatility > 5:
+        comment += "Jest to stosunkowo wysoka zmienność, co wskazuje na podwyższone ryzyko inwestycyjne, "
+        comment += "ale jednocześnie oferuje potencjalne okazje inwestycyjne dla strategii krótkoterminowych. "
+    else:
+        comment += "Jest to stosunkowo niska zmienność, co wskazuje na stabilne zachowanie indeksu, "
+        comment += "preferowane przy strategiach długoterminowych. "
 
-# Podsumowanie
-comment += "\n#### Podsumowanie\n"
-comment += f"Ogólny trend dla indeksu {ticker} w analizowanym okresie jest **{trend_description}**. "
+        # Podsumowanie
+        comment += "\n#### Podsumowanie\n"
+        comment += f"Ogólny trend dla indeksu {ticker} w analizowanym okresie jest **{trend_description}**. "
 
-if trend_description == "wzrostowy" and latest_rsi < 70:
-    comment += "Analiza techniczna wskazuje na kontynuację trendu wzrostowego, "
-    comment += "a wskaźnik RSI nie sygnalizuje jeszcze wykupienia rynku. "
-elif trend_description == "wzrostowy" and latest_rsi > 70:
-    comment += "Pomimo ogólnego trendu wzrostowego, wskaźnik RSI sygnalizuje wykupienie rynku, "
-    comment += "co może prowadzić do krótkoterminowej korekty spadkowej. "
-elif trend_description == "spadkowy" and latest_rsi > 30:
-    comment += "Analiza techniczna wskazuje na kontynuację trendu spadkowego, "
-    comment += "a wskaźnik RSI nie sygnalizuje jeszcze wyprzedania rynku. "
-elif trend_description == "spadkowy" and latest_rsi < 30:
-    comment += "Pomimo ogólnego trendu spadkowego, wskaźnik RSI sygnalizuje wyprzedanie rynku, "
-    comment += "co może prowadzić do krótkoterminowego odbicia wzrostowego. "
+    if trend_description == "wzrostowy" and latest_rsi < 70:
+        comment += "Analiza techniczna wskazuje na kontynuację trendu wzrostowego, "
+        comment += "a wskaźnik RSI nie sygnalizuje jeszcze wykupienia rynku. "
+    elif trend_description == "wzrostowy" and latest_rsi > 70:
+        comment += "Pomimo ogólnego trendu wzrostowego, wskaźnik RSI sygnalizuje wykupienie rynku, "
+        comment += "co może prowadzić do krótkoterminowej korekty spadkowej. "
+    elif trend_description == "spadkowy" and latest_rsi > 30:
+        comment += "Analiza techniczna wskazuje na kontynuację trendu spadkowego, "
+        comment += "a wskaźnik RSI nie sygnalizuje jeszcze wyprzedania rynku. "
+    elif trend_description == "spadkowy" and latest_rsi < 30:
+        comment += "Pomimo ogólnego trendu spadkowego, wskaźnik RSI sygnalizuje wyprzedanie rynku, "
+        comment += "co może prowadzić do krótkoterminowego odbicia wzrostowego. "
 
-return comment
+    return comment
 
 
 # ======================================================
