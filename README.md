@@ -217,8 +217,8 @@ def generate_comments(data, ticker, start_date, end_date):
 
 ## Autor
 
-Student  
-Data: 10.06.2025
+Dawid Stachiewicz  
+Data zakończenia: 10.06.2025
 
 ## Licencja
 
