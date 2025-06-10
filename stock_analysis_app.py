@@ -1040,7 +1040,7 @@ def main():
             # Wykres zmian procentowych
             st.markdown("### Porównanie zmian procentowych")
             fig_perf = create_performance_chart(technical_data, selected_tickers, start_date, end_date)
-            st.plotly_chart(fig_perf, use_container_width=True, key=f"performance_chart_{ticker}")
+            st.plotly_chart(fig_perf, use_container_width=True, key="perf_chart_1")
         else:
             # Wykres świecowy (tylko dla jednego indeksu)
             if len(selected_tickers) > 1:
@@ -1127,7 +1127,7 @@ def main():
         # Porównanie zmian procentowych
         st.markdown("### Porównanie zmian procentowych")
         fig_perf = create_performance_chart(technical_data, selected_tickers, start_date, end_date)
-        st.plotly_chart(fig_perf, use_container_width=True, key=f"performance_chart_{ticker}")
+        st.plotly_chart(fig_perf, use_container_width=True, key="perf_chart_2")
 
         # Macierz korelacji
         st.markdown("### Macierz korelacji zmian procentowych")
