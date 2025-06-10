@@ -990,8 +990,8 @@ def main():
         st.markdown("""
         Aplikacja stworzona w ramach projektu zaliczeniowego.
 
-        **Autorzy:** Piech Faustyna, Skiba Maria;\n
-        Skrzek Martyna, Solarz Aleksandra,\n
+        **Autorzy:** \n Piech Faustyna, Skiba Maria,
+        Skrzek Martyna, Solarz Aleksandra,
         Dawid Stachiewicz  
         **Data zakończenia:** 10.06.2025
         """)
