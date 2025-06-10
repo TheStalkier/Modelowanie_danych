@@ -66,7 +66,7 @@ st.markdown("""
 def load_data():
     try:
         # Wczytanie danych z poprawką na nazwę kolumny
-        df = pd.read_csv('C:/Users/dawid/Documents/Projekt_Modelowanie_danych/indexData.csv').rename(columns={'Index': 'Ticker'})
+        df = pd.read_csv('indexData.csv').rename(columns={'Index': 'Ticker'})
         
         # Konwersja daty i sortowanie
         df['Date'] = pd.to_datetime(df['Date'])
