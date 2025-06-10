@@ -759,7 +759,7 @@ def generate_comments(data, ticker, start_date, end_date):
     latest_rsi = filtered_data['RSI'].iloc[-1]
 
     # Przygotowanie komentarza
-    comment = f"### Analiza {ticker} w okresie {start_date.date()} - {end_date.date()}"
+    comment = f"### Analiza {ticker} w okresie {start_date.date()} - {end_date.date()} \n"
 
 
 
